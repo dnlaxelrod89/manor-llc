@@ -23,8 +23,10 @@ export default function Header({ isScrolled }: HeaderProps) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 isolate transition-all duration-300 ${
-        isScrolled ? 'bg-amber-950/95 backdrop-blur-sm shadow-lg' : 'bg-amber-950/50 backdrop-blur-sm'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'bg-amber-950/95 backdrop-blur-sm shadow-lg'
+          : 'bg-amber-950/90 backdrop-blur-sm'
       }`}
     >
       <div className="hidden md:block bg-amber-900 text-white text-center py-2 text-sm md:text-base font-semibold">
