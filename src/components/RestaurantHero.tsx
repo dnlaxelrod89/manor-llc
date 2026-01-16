@@ -6,7 +6,7 @@ export default function RestaurantHero() {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-32 md:pt-40">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
