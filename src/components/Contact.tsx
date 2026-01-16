@@ -1,17 +1,38 @@
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { useState } from 'react';
+import toast from "react-hot-toast";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    company: '',
-    message: '',
+    reason: '',
+    detail: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+
+    const toastId = toast.loading("Sending message...");
+    try {
+      const res = await fetch("https://manor-llc-backend.vercel.app/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ formData }),
+      });
+
+      const data = await res.json();
+      if (!data.ok) {
+        throw new Error("Failed");
+      }
+
+      toast.success("Message sent successfully!", { id: toastId });
+    } catch (e) {
+      toast.error("Failed to send message. Please try again.", {
+        id: toastId,
+      });
+    }
+    
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -114,31 +135,31 @@ export default function Contact() {
                 />
               </div>
               <div>
-                <label htmlFor="company" className="block text-sm font-semibold mb-2 text-amber-950">
+                <label htmlFor="reason" className="block text-sm font-semibold mb-2 text-amber-950">
                   Contact Reason
                 </label>
                 <input
                   type="text"
-                  id="company"
-                  name="company"
-                  value={formData.company}
+                  id="reason"
+                  name="reason"
+                  value={formData.reason}
                   onChange={handleChange}
                   className="w-full bg-white border-2 border-amber-200 rounded-lg px-4 py-3 focus:outline-none focus:border-amber-600 transition-colors text-gray-900"
-                  placeholder="Wedding, Birthday, Corporate Event, etc."
+                  placeholder="Tell us why your reaching out ( example - birthday party, catering , etc)."
                 />
               </div>
               <div>
-                <label htmlFor="message" className="block text-sm font-semibold mb-2 text-amber-950">
+                <label htmlFor="detail" className="block text-sm font-semibold mb-2 text-amber-950">
                   Contact Details
                 </label>
                 <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
+                  id="detail"
+                  name="detail"
+                  value={formData.detail}
                   onChange={handleChange}
                   rows={5}
                   className="w-full bg-white border-2 border-amber-200 rounded-lg px-4 py-3 focus:outline-none focus:border-amber-600 transition-colors resize-none text-gray-900"
-                  placeholder="Tell us about your event (date, number of guests, special requests)..."
+                  placeholder="Tell us about your event (date, number of guests, special requests, will you need catering, and go into details with what you’re looking for)."
                   required
                 ></textarea>
               </div>

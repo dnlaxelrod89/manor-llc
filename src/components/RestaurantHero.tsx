@@ -27,7 +27,7 @@ export default function RestaurantHero() {
             Premium Caribbean
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">
-              Catering Services
+              Catering Services & Special Event Venue
             </span>
           </h1>
 
