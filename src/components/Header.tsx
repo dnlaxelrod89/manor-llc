@@ -23,11 +23,11 @@ export default function Header({ isScrolled }: HeaderProps) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 isolate transition-all duration-300 ${
         isScrolled ? 'bg-amber-950/95 backdrop-blur-sm shadow-lg' : 'bg-amber-950/50 backdrop-blur-sm'
       }`}
     >
-      <div className="bg-amber-900 text-white text-center py-2 text-sm md:text-base font-semibold">
+      <div className="hidden md:block bg-amber-900 text-white text-center py-2 text-sm md:text-base font-semibold">
         THE MANOR RESTAURANT LLC
       </div>
       <nav className="container mx-auto px-6 py-4">
@@ -65,7 +65,7 @@ export default function Header({ isScrolled }: HeaderProps) {
         </div>
 
         {mobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 space-y-4">
+          <div className="md:hidden mt-4 pb-4 space-y-4 bg-amber-950/95 backdrop-blur-sm rounded-xl p-4">
             {navItems.map((item) => (
               <button
                 key={item.label}
